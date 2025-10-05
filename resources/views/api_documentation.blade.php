@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cashify API Documentation</title>
     <style>
+        html { scroll-behavior: smooth; }
         body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; margin: 2rem; line-height: 1.5; color: #0f172a; }
         code, pre { background: #0b1220; color: #e5e7eb; padding: 0.5rem 0.75rem; border-radius: 6px; overflow-x: auto; display: block; }
         h1, h2, h3 { color: #111827; }
+        .text-white { color: #ffffff; }
         .tag { display: inline-block; font-size: 0.8rem; padding: 0.15rem 0.5rem; border-radius: 999px; background: #e5e7eb; color: #111827; margin-right: .5rem; }
         .method { font-weight: 700; }
         .get { background:#dbeafe; color:#1e40af; }
@@ -19,11 +21,30 @@
         .url { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
         .note { color:#475569; font-size:.95rem; }
         .layout { display: flex; gap: 2rem; }
-        .sidebar { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; height: fit-content; max-height: calc(100vh - 4rem); overflow:auto; }
-        .sidebar nav a { display:block; color:#0f172a; text-decoration:none; padding:.25rem 0; }
-        .sidebar nav a:hover { text-decoration: underline; }
+        .sidebar { background: linear-gradient(180deg,rgb(240, 240, 240) 10%,rgb(194, 194, 194) 100%); color: #ffffff; border-radius: 8px; padding: 1rem; height: 100vh; min-height: 100vh; overflow:auto; box-shadow: 0 2px 8px rgba(2,8,23,.08); }
+        .sidebar .brand { display:flex; align-items:center; gap:.5rem; padding: .5rem .5rem 1rem .5rem; font-weight: 700; letter-spacing:.3px; border-bottom: 1px solid rgba(255,255,255,.15); }
+        .sidebar .brand .dot { width:10px; height:10px; border-radius: 999px; background:#fff; display:inline-block; }
+        .sidebar .nav { list-style: none; margin: 0; padding: .75rem 0 0 0; }
+        .sidebar .nav-item { margin: .15rem 0; }
+        .sidebar .nav-link { display:flex; align-items:center; gap:.5rem; color:#ffffff; text-decoration:none; padding:.65rem 1rem; border-left: .25rem solid transparent; opacity:.95; }
+        .sidebar .nav-link:hover { background: rgba(255,255,255,.08); opacity:1; }
+        .sidebar .nav-link.active { border-left-color: #ffffff; background: rgba(255,255,255,.12); }
+        .sidebar .icon { width: 1rem; height: 1rem; display:inline-block; }
         .content { flex: 1; min-width: 0; }
         .sidebar-toggle { display:none; }
+
+        .nav a {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0;
+            color: inherit;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.15s;
+        }
+        .nav a:hover, .nav a.active {
+            background: rgba(255,255,255,0.10);
+        }
 
         @media (min-width:1024px) {
             .sidebar { position: sticky; top: 1rem; width: 260px; }
@@ -31,7 +52,7 @@
 
         @media (max-width:1023px) {
             .layout { position: relative; }
-            .sidebar { position: fixed; top:0; left:0; bottom:0; width: 80%; max-width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,.15); transform: translateX(-100%); transition: transform .2s ease; z-index: 50; }
+            .sidebar { position: fixed; top:0; left:0; bottom:0; width: 80%; max-width: 280px; transform: translateX(-100%); transition: transform .2s ease; z-index: 50; }
             .sidebar.open { transform: translateX(0); }
             .sidebar-toggle { display: inline-block; position: fixed; top: .75rem; left: .75rem; z-index: 60; background:#111827; color:#fff; border:0; border-radius: 6px; padding:.5rem .75rem; }
         }
@@ -43,7 +64,6 @@
     <meta name="doc-version" content="v1" />
     <meta name="doc-app" content="Cashify API" />
     <link rel="icon" href="/favicon.ico" />
-    <base target="_blank">
     <script>
         function curl(host, method, path, body, token) {
             const h = token ? ` -H "Authorization: Bearer ${token}"` : '';
@@ -54,6 +74,33 @@
             var el = document.getElementById('sidebar');
             if (el) { el.classList.toggle('open'); }
         }
+        function closeSidebarOnMobile() {
+            var el = document.getElementById('sidebar');
+            if (el && window.innerWidth < 1024) { el.classList.remove('open'); }
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            var links = document.querySelectorAll('#sidebar a[href^="#"]');
+            links.forEach(function(a){
+                a.addEventListener('click', function(){
+                    // allow default anchor jump (smooth via CSS), then close on mobile
+                    setTimeout(closeSidebarOnMobile, 50);
+                });
+            });
+            // Optional: mark active link on scroll
+            var sections = ['section-auth','section-wallets','section-categories','section-transactions'];
+            var navMap = {};
+            links.forEach(function(a){ navMap[a.getAttribute('href').slice(1)] = a; });
+            var observer = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if (e.isIntersecting) {
+                        Object.values(navMap).forEach(function(l){ l.classList.remove('active'); });
+                        var id = e.target.getAttribute('id');
+                        if (navMap[id]) { navMap[id].classList.add('active'); }
+                    }
+                });
+            }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, 1] });
+            sections.forEach(function(id){ var el = document.getElementById(id); if (el) observer.observe(el); });
+        });
     </script>
     <noscript></noscript>
     <!-- Static HTML only; no runtime JS dependency -->
@@ -64,12 +111,13 @@
 
 <div class="layout">
     <aside class="sidebar" id="sidebar">
-        <h3>Daftar Isi</h3>
+        <h2>Daftar Isi</h2>
+        <hr>
         <nav>
-            <a href="#section-auth">Authentication</a>
-            <a href="#section-wallets">Wallets</a>
-            <a href="#section-categories">Categories</a>
-            <a href="#section-transactions">Transactions</a>
+            <a style="color: black; text-decoration: none; display: block; padding: 0.5rem 0;" href="#section-auth">Authentication</a>
+            <a style="color: black; text-decoration: none; display: block; padding: 0.5rem 0;" href="#section-wallets">Wallets</a>
+            <a style="color: black; text-decoration: none; display: block; padding: 0.5rem 0;" href="#section-categories">Categories</a>
+            <a style="color: black; text-decoration: none; display: block; padding: 0.5rem 0;" href="#section-transactions">Transactions</a>
         </nav>
     </aside>
     <main class="content">
