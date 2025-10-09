@@ -55,6 +55,21 @@ class WalletController extends Controller
         $wallet->delete();
         return response()->json(null, 204);
     }
+
+    public function users(Request $request, Wallet $wallet)
+    {
+        // Authorization check: user must be a member of the wallet
+        $isMember = $wallet->members()->where('user_id', $request->user()->id)->exists();
+        $isAdmin = $wallet->admin_id === $request->user()->id;
+
+        if (!$isMember && !$isAdmin) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $users = $wallet->members()->with('user')->get()->pluck('user');
+
+        return response()->json($users);
+    }
 }
 
 

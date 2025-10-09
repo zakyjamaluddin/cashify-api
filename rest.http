@@ -1,0 +1,211 @@
+// Register a new user
+POST http://cashify-api.test/api/register
+content-type: application/json
+
+{
+  "display_name": "Dhotul",
+  "email": "dhotul@example.com",
+  "password": "12345678"
+}
+
+###
+// Login with the registered user
+POST http://cashify-api.test/api/login
+content-type: application/json
+
+{
+  "email": "zaky2@example.com",
+  "password": "12345678"
+}
+
+###
+// Logout the user
+POST http://cashify-api.test/api/logout
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get Wallets
+GET http://cashify-api.test/api/wallets
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+### 
+// Create a new Wallet
+POST http://cashify-api.test/api/wallets
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "name": "Dompet 2",
+  "privacy": "Private"
+}
+
+###
+// Update Wallet
+PUT http://cashify-api.test/api/wallets/a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "name": "Dompet Keluarga",
+  "privacy": "Shared"
+}
+
+###
+// Delete Wallet
+DELETE http://cashify-api.test/api/wallets/3bbec054-92e7-4ca9-a286-a7d70e6dbb64
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get Categories
+GET http://cashify-api.test/api/categories
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Create a new Category
+POST http://cashify-api.test/api/categories
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "name": "Gadget",
+  "type": "Expense",
+  "icon": "device-phone",
+  "color": "#3B82F6"
+}
+
+###
+// Update Category
+PUT http://cashify-api.test/api/categories/8ecd1912-3359-4843-bd4a-5af4d7dca73c
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "name": "Gadget Updated",
+  "type": "Expense",
+  "icon": "device-phone",
+  "color": "#3B82F6"
+}
+
+###
+// Delete Category
+DELETE http://cashify-api.test/api/categories/8ecd1912-3359-4843-bd4a-5af4d7dca73c
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get Transactions
+GET http://cashify-api.test/api/transactions?wallet_id=a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Create a new Transaction
+POST http://cashify-api.test/api/transactions
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "wallet_id": "a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c",
+  "type": "Expense",
+  "category_id": "80b5f6f6-a88b-4ecc-a897-767681c3b7b3",
+  "amount": 125000,
+  "description": "Beli headset",
+  "date": "2025-10-05T12:00:00Z"
+}
+
+###
+// Update Transaction
+PUT http://cashify-api.test/api/transactions/13811f63-462b-4684-a80f-8002858024e4
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "category_id": "80b5f6f6-a88b-4ecc-a897-767681c3b7b3",
+  "amount": 150000,
+  "description": "Beli headset Updated",
+  "date": "2025-10-05T12:00:00Z"
+}
+
+###
+// Delete Transaction
+DELETE http://cashify-api.test/api/transactions/13811f63-462b-4684-a80f-8002858024e4
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get Users
+GET http://cashify-api.test/api/users
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get a specific User
+GET http://cashify-api.test/api/users/9eb5d590-8877-4a7b-b9c7-652e31deb453
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Update User
+PUT http://cashify-api.test/api/users/9eb5d590-8877-4a7b-b9c7-652e31deb453
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+{
+  "display_name": "Zaky Jamaluddin",
+  "email": "zaky2@example.com"
+}
+
+###
+/// Delete User
+DELETE http://cashify-api.test/api/users/9eb5d590-8877-4a7b-b9c7-652e31deb453
+authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+content-type: application/json
+
+###
+// Get users of a specific Wallet
+GET http://cashify-api.test/api/wallets/a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c/users
+authorization: Bearer 12|EvN0Cm2o7omwp3wb8yq3U35narCgipMmbPjYyGfR0e899ff8
+content-type: application/json
+
+###
+# Wallet Invitations
+
+###
+// (Admin) Invite a user to a wallet
+// Ganti {wallet_id} dengan ID wallet yang dimiliki admin
+// Ganti {admin_token} dengan token admin
+// Ganti {email_to_invite} dengan email user yang akan diundang
+POST http://cashify-api.test/api/wallets/a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c/invitations
+authorization: Bearer 10|DQdHxLBreZ0ZZd7wQ7CemT7tiOpl7AfWCx0ordFQ245d89a1
+content-type: application/json
+
+{
+  "email": "dhotul@example.com"
+}
+
+###
+// (User) Get pending invitations
+// Ganti {user_token} dengan token user yang diundang
+GET http://cashify-api.test/api/invitations
+authorization: Bearer 11|reJI0cTVgLmV8ZOMVoKuPRUTiHsm20AoLFLTFmX675e4d4c0
+content-type: application/json
+
+###
+// (User) Accept an invitation
+// Ganti {invitation_id} dengan ID undangan dari response GET /api/invitations
+// Ganti {user_token} dengan token user yang diundang
+POST http://cashify-api.test/api/invitations/4f3ad5f2-5b84-44b0-97c7-7f60ff3cef6f/accept
+authorization: Bearer 11|reJI0cTVgLmV8ZOMVoKuPRUTiHsm20AoLFLTFmX675e4d4c0
+content-type: application/json
+
+###
+// (User) Decline an invitation
+// Ganti {invitation_id} dengan ID undangan dari response GET /api/invitations
+// Ganti {user_token} dengan token user yang diundang
+POST http://cashify-api.test/api/invitations/64d43745-31b6-464d-88aa-8dd944eed318/decline
+authorization: Bearer {user_token}
+content-type: application/json

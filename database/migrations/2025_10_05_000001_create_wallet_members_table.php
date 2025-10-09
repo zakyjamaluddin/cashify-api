@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('wallet_id');
             $table->uuid('user_id');
-            $table->enum('role', ['Admin', 'Editor', 'Viewer']);
+            $table->enum('role', ['Viewer', 'Member'])->default('Member');
             $table->timestamp('joined_at')->useCurrent();
 
             $table->unique(['wallet_id', 'user_id'], 'unique_wallet_user');

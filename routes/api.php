@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\WalletInvitationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::apiResource('wallets', WalletController::class);
+    Route::get('wallets/{wallet}/users', [WalletController::class, 'users']);
+    Route::post('wallets/{wallet}/invitations', [WalletInvitationController::class, 'store']);
+    Route::get('invitations', [WalletInvitationController::class, 'index']);
+    Route::post('invitations/{invitation}/accept', [WalletInvitationController::class, 'accept']);
+    Route::post('invitations/{invitation}/decline', [WalletInvitationController::class, 'decline']);
     Route::apiResource('categories', CategoryController::class);
     Route::apiResource('transactions', TransactionController::class);
+    Route::apiResource('users', UserController::class);
 });

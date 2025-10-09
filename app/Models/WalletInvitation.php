@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
-class Transaction extends Model
+class WalletInvitation extends Model
 {
     use HasFactory;
 
@@ -28,20 +28,10 @@ class Transaction extends Model
 
     protected $fillable = [
         'wallet_id',
-        'type',
-        'category_id',
-        'amount',
-        'description',
-        'date',
-        'proof_url',
-        'recorded_by',
-        'is_recurring',
-        'recurring_schedule_id',
-    ];
-
-    protected $casts = [
-        'date' => 'datetime',
-        'is_recurring' => 'boolean',
+        'email',
+        'invited_by',
+        'user_id',
+        'status',
     ];
 
     public function wallet(): BelongsTo
@@ -49,16 +39,13 @@ class Transaction extends Model
         return $this->belongsTo(Wallet::class);
     }
 
-    public function category(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function recorder(): BelongsTo
+    public function invitedBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'recorded_by');
+        return $this->belongsTo(User::class, 'invited_by');
     }
 }
-
-
-
