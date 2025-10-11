@@ -28,11 +28,10 @@ class TransactionController extends Controller
             $query->where('date', '<=', $request->date('to'));
         }
 
-        return response()->json($query->orderByDesc('date'));
+        // return response()->json($query->orderByDesc('date')->paginate(20));
+        return response()->json($query->orderByDesc('date')->get());
     }
 
-
-    // Simpan transaksi baru
     public function store(StoreTransactionRequest $request)
     {
         $tx = Transaction::create(array_merge($request->validated(), [
