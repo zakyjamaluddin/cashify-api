@@ -28,7 +28,7 @@ class TransactionController extends Controller
             $query->where('date', '<=', $request->date('to'));
         }
 
-        return response()->json($query->orderByDesc('date')->paginate(20));
+        return response()->json($query->orderByDesc('date'));
     }
 
     public function store(StoreTransactionRequest $request)
