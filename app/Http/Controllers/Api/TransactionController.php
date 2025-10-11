@@ -31,6 +31,8 @@ class TransactionController extends Controller
         return response()->json($query->orderByDesc('date'));
     }
 
+
+    // Simpan transaksi baru
     public function store(StoreTransactionRequest $request)
     {
         $tx = Transaction::create(array_merge($request->validated(), [
