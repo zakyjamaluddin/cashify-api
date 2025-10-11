@@ -21,23 +21,22 @@ content-type: application/json
 ###
 // Logout the user
 POST http://cashify-api.test/api/logout
-authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+authorization: Bearer 13|n8G5TY2fqVXqI88xojfHE4yg69jgR6sjPGXc9q7Eaf29acf3
 content-type: application/json
 
 ###
 // Get Wallets
 GET http://cashify-api.test/api/wallets
-authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
-content-type: application/json
+authorization: Bearer 14|3jeTIeqHRkJ3PfNN0IlN5hp0N4BMtGvkDDgurWGv92b56e00
 
 ### 
 // Create a new Wallet
 POST http://cashify-api.test/api/wallets
-authorization: Bearer 6|K7H46P0kwIvBgIZ4Ep6LegnlYwyNTW24KXWXiWkja2c0faa4
+authorization: Bearer 14|3jeTIeqHRkJ3PfNN0IlN5hp0N4BMtGvkDDgurWGv92b56e00
 content-type: application/json
 
 {
-  "name": "Dompet 2",
+  "name": "Dompet 5",
   "privacy": "Private"
 }
 
