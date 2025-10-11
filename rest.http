@@ -21,13 +21,13 @@ content-type: application/json
 ###
 // Logout the user
 POST http://cashify-api.test/api/logout
-authorization: Bearer 13|n8G5TY2fqVXqI88xojfHE4yg69jgR6sjPGXc9q7Eaf29acf3
-content-type: application/json
+authorization: Bearer 20|MGfAROUubnS3cbfMWYOTByJwbQ4DXkHXd647Zvof73c17621
 
 ###
 // Get Wallets
 GET http://cashify-api.test/api/wallets
-authorization: Bearer 14|3jeTIeqHRkJ3PfNN0IlN5hp0N4BMtGvkDDgurWGv92b56e00
+authorization: Bearer 21|ymS0VGlCR4opuv11LxvJAmRvRB0L4NzVQsExOyfZ0e1a2c1d
+content-type: application/json
 
 ### 
 // Create a new Wallet
