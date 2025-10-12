@@ -32,6 +32,11 @@ class WalletInvitationController extends Controller
             }
         }
 
+        if(empty($userToInvite)) {
+            // Optionally, you could create a new user here or send an email invitation
+            return response()->json(['error' => 'User with this email does not exist'], 500);
+        }
+
         // Check if an invitation is already pending
         $existingInvitation = WalletInvitation::where('wallet_id', $wallet->id)
             ->where('email', $emailToInvite)

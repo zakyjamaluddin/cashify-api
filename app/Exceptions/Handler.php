@@ -95,6 +95,16 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => 'The specified URL cannot be found.'], 404);
         }
 
+        if ($exception instanceof \Illuminate\Database\QueryException) {
+            if (config('app.debug')) {
+                return response()->json([
+                    'message' => 'Database query error.',
+                    'error' => $exception->getMessage()
+                ], 500);
+            }
+            return response()->json(['message' => 'A database error occurred.'], 500);
+        }
+
         if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
             return response()->json(['message' => $exception->getMessage()], $exception->getStatusCode());
         }

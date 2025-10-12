@@ -179,8 +179,7 @@ content-type: application/json
 // Ganti {admin_token} dengan token admin
 // Ganti {email_to_invite} dengan email user yang akan diundang
 POST http://cashify-api.test/api/wallets/a82c5f7e-ee4d-4b06-9bb4-daa1da5f818c/invitations
-authorization: Bearer 10|DQdHxLBreZ0ZZd7wQ7CemT7tiOpl7AfWCx0ordFQ245d89a1
-content-type: application/json
+authorization: Bearer 22|8ZlpLZY45Dl1LyCQ12H0m1yOBZBZqBRMQnHrnjqS90e3eedc
 
 {
   "email": "dhotul@example.com"
