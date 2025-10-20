@@ -3,9 +3,19 @@ POST http://cashify-api.test/api/register
 content-type: application/json
 
 {
-  "display_name": "Dhotul",
-  "email": "dhotul@example.com",
+  "display_name": "Zaky Jamaluddin",
+  "email": "zakyjamaluddin@gmail.com",
   "password": "12345678"
+}
+
+###
+// Verify OTP
+POST http://cashify-api.test/api/verify-otp
+content-type: application/json
+
+{
+  "user_id": "9618889d-0369-4116-b1b3-dde99a62ece0",
+  "otp": "744562"
 }
 
 ###
@@ -14,7 +24,7 @@ POST http://cashify-api.test/api/login
 content-type: application/json
 
 {
-  "email": "zaky2@example.com",
+  "email": "zakyjamaluddin1812@gmail.com",
   "password": "12345678"
 }
 

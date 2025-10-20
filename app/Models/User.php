@@ -25,6 +25,8 @@ class User extends Authenticatable
         'is_email_verified',
         'subscription_status',
         'active_wallet_id',
+        'otp_code',
+        'otp_expires_at',
     ];
 
     /**
