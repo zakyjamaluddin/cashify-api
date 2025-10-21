@@ -118,8 +118,8 @@ class AuthController extends Controller
     // Resend OTP
     public function resendOtp(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
-        $user = User::where('email', $request->email)->first();
+        $request->validate(['user_id' => 'required|uuid']);
+        $user = User::find($request->user_id);
 
         if (!$user) {
             return response()->json(['message' => 'User tidak ditemukan.'], 404);

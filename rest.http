@@ -4,7 +4,7 @@ content-type: application/json
 
 {
   "display_name": "Zaky Jamaluddin",
-  "email": "zakyjamaluddin@gmail.com",
+  "email": "zakyjamaluddin1812@gmail.com",
   "password": "12345678"
 }
 
@@ -14,8 +14,18 @@ POST http://cashify-api.test/api/verify-otp
 content-type: application/json
 
 {
-  "user_id": "9618889d-0369-4116-b1b3-dde99a62ece0",
-  "otp": "744562"
+  "user_id": "4d51a19d-d971-409e-9be7-b92e81cbd8d1",
+  "otp": "157583"
+}
+
+###
+// Resend OTP
+
+POST http://cashify-api.test/api/resend-otp
+content-type: application/json
+
+{
+  "user_id": "e82b98f0-a609-4b6b-b32e-9b4153431ccd"
 }
 
 ###
