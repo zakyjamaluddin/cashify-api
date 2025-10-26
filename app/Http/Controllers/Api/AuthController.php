@@ -17,11 +17,28 @@ class AuthController extends Controller
     // Register
     public function register(Request $request)
     {
-        $request->validate([
-            'display_name' => 'nullable|string|max:100',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        try {
+            $request->validate([
+                'display_name' => 'nullable|string|max:100',
+                'email' => 'required|string|email|unique:users',
+                'password' => 'required|string|min:6',
+            ]);
+        } catch (ValidationException $e) {
+            $emailErrors = $e->errors()['email'] ?? [];
+            foreach ($emailErrors as $error) {
+                if (str_contains($error, 'has already been taken')) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Email ini sudah terdaftar',
+                        'data' => User::where('email', $request->email)->select('id as user_id', 'is_email_verified')->first()->toArray(),
+                    ], 422);
+                }
+            }
+
+    // kalau bukan duplikasi, lempar balik ke Laravel
+    throw $e;
+        }
+        
 
         $otp = rand(100000, 999999);
 
